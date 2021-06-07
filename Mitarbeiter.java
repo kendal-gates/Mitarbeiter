@@ -1,163 +1,150 @@
-/**
- *
- * Implementierung Mitarbeiter (MA)
- * Die Klasse implementiert das Verhalten von MA in
- * accounting, production und advertising
- * 
- * @author P.Schmidt
- *
- */
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class Mitarbeiter {
-	
-	private String name;
-	private String firstName;
-	private int birthYear;
-	
-	public String workID;
-	public String department;
-	public String role;
-	
-	/**
-	 * Konstruktor Klasse
-	 * 
-	 * @param name 			: Familienname des MA
-	 * @param firstName 	: Vorname des MA 
-	 * @param birthYear 	: Geburtsjahr MA
-	 * @param workID		: MA-Nr, intern
-	 * @param department	: Abteilung
-	 * @param role			: Job
-	 */
-	
-	public Mitarbeiter(String name, String firstName, int birthYear, String workID, String department, String role) {
-		this.name = name;
-		this.firstName = firstName;
-		this.birthYear = birthYear;
+public class Mitarbeiter extends Person {
+
+	private String workID;
+	private String department;
+	private String role;
+	private static int hiredDate;
+
+	public Mitarbeiter(String name, String firstName, int birthYear, String workID, String department, String role,
+			int hiredDate) {
+		setName(name);
+		setFirstName(firstName);
+		setBirthYear(birthYear);
 		this.workID = workID;
 		this.department = department;
 		this.role = role;
-				
+		Mitarbeiter.hiredDate = hiredDate;
+	}
+	public static int yearsOfService() {
+		Calendar calendar = new GregorianCalendar();
+		return calendar.get(Calendar.YEAR) - getHiredDate();
 	}
 
 	/**
-	 * Getter
-	 * @return name  // Familienname MA
+	 * @return the workID
 	 */
-	public String getName() {
-		return name;
+	public String getWorkID() {
+		return workID;
 	}
-	
+
 	/**
-	 * Setter
-	 * @param name // Familienname MA
+	 * @param workID the workID to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setWorkID(String workID) {
+		this.workID = workID;
 	}
-	
-	
+
 	/**
-	 * Getter
-	 * @return fistName // Vorname MA
-	 * 
+	 * @return the department
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getDepartment() {
+		return department;
 	}
-	
+
 	/**
-	 * Setter
-	 * @param firstName // Vorname MA
-	 * Vorname
+	 * @param department the department to set
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
-	
+
 	/**
-	 * Getter
-	 * @return birthYear // Geburtsjahr MA
+	 * @return the role
 	 */
-	public int getBirthYear() {
-		return birthYear;
+	public String getRole() {
+		return role;
 	}
-	
-	
+
 	/**
-	 * Setter
-	 * @param birthYear // Geburtsjahr MA
+	 * @param role the role to set
 	 */
-	public void setBirthYear(int birthYear) {
-		this.birthYear = birthYear;
+	public void setRole(String role) {
+		this.role = role;
 	}
-	
+
+	/**
+	 * @return the hiredDate
+	 */
+	public static int getHiredDate() {
+		return hiredDate;
+	}
+
+	/**
+	 * @param hiredDate the hiredDate to set
+	 */
+	public void setHiredDate(int hiredDate) {
+		Mitarbeiter.hiredDate = hiredDate;
+	}
+
 	/**
 	 * Methode zur Fallunterscheidung
+	 * 
 	 * @param flag // zB #manufacturing
 	 */
 	public void doYourWork(String flag) {
-		
+
 		switch (flag) {
-		case "#manufacturing":
-			this.assembleCar();
-			break;
-		case "#accounting":
-			this.checkAccount();
-			break;			
-		case "#advertising":
-			this.postingOnSocialMedia();
-			break;
-		default:
-			this.doSomething();
-			break;
-		}		
-		
+			case "#manufacturing":
+				this.assembleCar();
+				break;
+			case "#accounting":
+				this.checkAccount();
+				break;
+			case "#advertising":
+				this.postingOnSocialMedia();
+				break;
+			default:
+				this.doSomething();
+				break;
+		}
+
 	}
-		
+
 	/**
-	 *  Ausgabe1 // Verhalten Luch
+	 * Ausgabe1 // Verhalten Lunch
 	 */
 	public void hasLunch() {
-		System.out.println("Hi, I'm " + firstName + " " + name + " and I'm having lunch!");		
+		System.out.println("Hi, I'm " + getFirstName() + " " + getName() + " and I'm having lunch!");
 	}
-	
+
 	/**
-	 *  Ausgabe2 //  Verhalten Arbeitsbeginn
+	 * Ausgabe2 // Verhalten Arbeitsbeginn
 	 */
 
 	public void startsWork() {
-		System.out.println("Hi, I'm " + firstName + " " + name + " and I'm starting my work!");		
+		System.out.println("Hi, I'm " + getFirstName() + " " + getName() + " and I'm starting my work!");
 	}
-	
-	
+
 	/**
-	 *  Ausgabe --> accounting
+	 * Ausgabe --> accounting
 	 */
 	private void checkAccount() {
-		System.out.println("Hi, I'm " + firstName + " " + name + " and I'm checking a customer's account!");		
+		System.out.println("Hi, I'm " + getFirstName() + " " + getName() + " and I'm checking a customer's account!");
 	}
-	
+
 	/**
-	 *  Ausgabe --> production
+	 * Ausgabe --> production
 	 */
 	private void assembleCar() {
-		System.out.println("Hi, I'm " + firstName + " " + name + " and I'm assembling a car!");		
+		System.out.println("Hi, I'm " + getFirstName() + " " + getName() + " and I'm assembling a car!");
 	}
 
 	/**
-	 *  Ausgabe --> advertising
+	 * Ausgabe --> advertising
 	 */
-	
+
 	private void postingOnSocialMedia() {
-		System.out.println("Hi, I'm " + firstName + " " + name + " and I'm posting a phothograph on IG!");		
+		System.out.println("Hi, I'm " + getFirstName() + " " + getName() + " and I'm posting a phothograph on IG!");
 	}
 
 	/**
-	 *  Ausgabe --> Default
+	 * Ausgabe --> Default
 	 */
 	private void doSomething() {
-		System.out.println("Hi, I'm doing something.");		
+		System.out.println("Hi, I'm doing something.");
 	}
-
 
 }
